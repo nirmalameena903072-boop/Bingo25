@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#090c14">
+  <meta name="description" content="Bingo 25 by Anlossa Group — a strategic 1–25 multiplayer game.">
+  <title>Bingo 25 — Anlossa Group</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <a class="brand" href="#home" aria-label="Bingo 25 home"><span class="brand-mark">25</span><span><b>BINGO <i>25</i></b><small>ANLOSSA GROUP</small></span></a>
+      <nav class="top-actions" aria-label="Main navigation">
+        <button class="icon-button" id="locker-open" title="Locker" aria-label="Locker">◇</button>
+        <button class="icon-button" id="settings-open" title="Settings" aria-label="Settings">⚙</button>
+        <button class="button button-small hidden" id="staff-open">Staff Panel</button>
+        <button class="button button-small button-quiet" id="auth-action">Sign in</button>
+        <div class="avatar hidden" id="user-avatar" aria-label="Player profile">P</div>
+      </nav>
+    </header>
+
+    <main id="app-main">
+      <section class="view landing-view" id="landing-view">
+        <div class="hero-copy">
+          <p class="eyebrow"><span class="live-dot"></span> STRATEGY. TIMING. 25 NUMBERS.</p>
+          <h1>Every number<br>changes <em>everything.</em></h1>
+          <p class="hero-description">A head-to-head game of foresight. Arrange your grid, read the board, and be the first to complete five lines.</p>
+          <div class="hero-actions"><button class="button button-primary" id="play-bot">Play vs Bot <span>↗</span></button><button class="button button-outline" id="play-online">1v1 Multiplayer</button></div>
+          <p class="fine-print">No sign-in needed to play locally. Multiplayer requires Google sign-in.</p>
+        </div>
+        <div class="hero-board-wrap" aria-hidden="true"><div class="hero-glow"></div><div class="mini-board" id="landing-board"></div><span class="floating-tag tag-a">12 winning lines</span><span class="floating-tag tag-b">1 — 25</span></div>
+        <div class="feature-strip"><div><b>01</b><span>Build your board</span></div><div><b>02</b><span>Take turns calling numbers</span></div><div><b>03</b><span>Five lines wins</span></div></div>
+        <div class="studio-note">A GAME BY <strong>ANLOSSA GROUP</strong><span>·</span> © 2026</div>
+      </section>
+
+      <section class="view hidden" id="username-view">
+        <div class="panel centered-panel"><p class="eyebrow">PLAYER IDENTITY</p><h2>Choose your handle</h2><p class="muted">Your unique name is how other players find and challenge you.</p><form id="username-form"><label for="username-input">Username</label><div class="input-row"><span>@</span><input id="username-input" minlength="3" maxlength="15" pattern="[A-Za-z0-9_]{3,15}" autocomplete="username" required placeholder="YourName"></div><p class="field-hint">3–15 letters, numbers, or underscores.</p><button class="button button-primary full-width" type="submit">Reserve username</button></form></div>
+      </section>
+
+      <section class="view hidden" id="lobby-view">
+        <div class="lobby-heading"><div><p class="eyebrow">WELCOME TO THE ARENA</p><h1>Lobby<span class="muted"> / </span><span id="lobby-greeting">Player</span></h1><p class="muted">Pick a mode or challenge someone to a duel.</p></div><div class="rank-card"><span class="rank-crest" id="rank-crest">I</span><div><small>YOUR RANK</small><b id="rank-name">Initiate</b><span id="rank-rp">100 RP</span></div></div></div>
+        <div class="lobby-grid">
+          <div class="panel play-panel"><div class="panel-heading"><div><span class="section-kicker">CHOOSE YOUR MATCH</span><h2>Ready when you are.</h2></div><span class="availability"><i></i> ARENA ONLINE</span></div><button class="mode-card mode-bot" id="lobby-bot"><span class="mode-icon">⌘</span><span><b>Practice the bot</b><small>Local match · zero stakes</small></span><span class="arrow">↗</span></button><button class="mode-card" id="lobby-online"><span class="mode-icon">◎</span><span><b>Challenge a player</b><small>Invite by username · ranked 1v1</small></span><span class="arrow">↗</span></button><div class="invite-entry"><label for="challenge-name">Quick challenge</label><div class="input-row"><span>@</span><input id="challenge-name" maxlength="15" placeholder="Opponent username"><button class="button button-primary" id="send-invite">Invite</button></div></div></div>
+          <div class="panel chat-panel"><div class="panel-heading"><div><span class="section-kicker">THE COMMON ROOM</span><h2>Lobby chat</h2></div><span class="chat-count" id="online-count">● 1 online</span></div><div class="chat-messages" id="chat-messages"><div class="empty-state"><span>✦</span><b>Welcome to the lobby</b><p>Sign in to join the conversation.</p></div></div><form class="chat-compose" id="chat-form"><input id="chat-input" maxlength="120" placeholder="Say something…" disabled><button type="submit" aria-label="Send message" disabled>↑</button></form></div>
+        </div>
+        <section class="panel friends-panel"><div class="panel-heading"><div><span class="section-kicker">YOUR CREW</span><h2>Friends</h2></div><span class="chat-count" id="friends-count">Sign in to add friends</span></div><div id="friends-list" class="friends-list"><p class="muted">Friends who are online will appear here.</p></div><div id="friend-requests" class="friend-requests"></div></section>
+        <div class="lobby-footer"><span>Matches are won by completing 5 of 12 lines.</span><button class="text-button" id="locker-link">Open locker →</button></div>
+      </section>
+
+      <section class="view hidden" id="arena-view">
+        <div class="arena-top"><button class="text-button" id="arena-back">← Lobby</button><div class="match-status"><i></i><span id="match-status-text">BOARD SETUP</span></div><button class="text-button" id="arena-exit">Leave match</button></div>
+        <div class="arena-title"><p class="eyebrow" id="arena-mode-label">LOCAL PRACTICE</p><h1 id="arena-title">Set your board.</h1><p id="arena-subtitle" class="muted">Tap a pair of cells to swap them, or shuffle for a fresh arrangement.</p></div>
+        <div class="match-layout">
+          <aside class="player-card"><div class="player-avatar">Y</div><div class="player-meta"><small>YOU</small><b id="my-player-name">You</b><span id="my-player-lines">0 / 5 lines</span></div><div class="turn-indicator" id="my-turn-indicator"></div></aside>
+          <div class="board-card"><div class="board-progress" id="board-progress" aria-label="Bingo line progress"></div><div class="board-wrap"><div class="game-board" id="my-board" role="grid" aria-label="Your 1 to 25 board"></div><svg class="strike-overlay" viewBox="0 0 500 500" preserveAspectRatio="none" aria-hidden="true"><g id="my-strikes"></g></svg></div><div class="board-legend"><span><i class="legend-x">×</i> Called number</span><span id="board-hint">Tap a cell to select</span></div></div>
+          <aside class="player-card opponent-card"><div class="player-avatar opponent-avatar">B</div><div class="player-meta"><small id="opponent-label">OPPONENT</small><b id="opponent-name">Bingo Bot</b><span id="opponent-lines">0 / 5 lines</span></div><div class="turn-indicator" id="opponent-turn-indicator"></div></aside>
+        </div>
+        <div class="arena-controls" id="setup-controls"><button class="button button-outline" id="shuffle-board">⤨ Shuffle</button><button class="button button-primary" id="ready-button">Ready <span>→</span></button><span class="setup-countdown" id="setup-countdown"></span></div>
+        <div class="arena-controls hidden" id="playing-controls"><p class="turn-clock"><span>TIME TO CALL</span><b id="turn-timer">15</b><small>sec</small></p><div class="called-numbers"><span>CALLED</span><div id="called-list">No numbers called yet</div></div><button class="button button-primary" id="call-selected" disabled>Call selected number</button></div>
+      </section>
+    </main>
+
+    <div class="modal-backdrop hidden" id="modal-backdrop"></div>
+    <section class="modal hidden" id="locker-modal" role="dialog" aria-modal="true" aria-labelledby="locker-title"><button class="modal-close" data-close="locker-modal" aria-label="Close">×</button><p class="eyebrow">YOUR COLLECTION</p><h2 id="locker-title">Locker</h2><p class="muted">Cosmetics unlock as you rise through the ranks. No shop, no shortcuts.</p><div class="locker-current"><span class="locker-preview">25</span><span><small>EQUIPPED BOARD</small><b id="equipped-skin">Ruled Notebook</b><small id="equipped-title">Rookie</small></span></div><div class="locker-unlocks" id="locker-unlocks"></div><div class="redeem-form"><label for="redeem-input">Discord redeem code</label><div class="input-row"><input id="redeem-input" maxlength="40" placeholder="ENTER CODE"><button class="button button-primary" id="redeem-button">Redeem</button></div></div><div id="locker-status" class="form-status"></div></section>
+
+    <section class="modal modal-wide hidden" id="settings-modal" role="dialog" aria-modal="true" aria-labelledby="settings-title"><button class="modal-close" data-close="settings-modal" aria-label="Close">×</button><p class="eyebrow">PREFERENCES</p><h2 id="settings-title">Settings</h2><div class="setting-row"><span><b>Sound effects</b><small>Synthesized clicks, slashes, and victory chime</small></span><label class="switch"><input id="sound-toggle" type="checkbox" checked><span></span></label></div><div class="setting-row"><span><b>Haptic feedback</b><small>Vibration on supported mobile devices</small></span><label class="switch"><input id="haptics-toggle" type="checkbox" checked><span></span></label></div><div class="setting-row"><span><b>Account</b><small id="account-label">Playing as a guest</small></span><button class="button button-outline" id="signout-button">Sign out</button></div><div class="contributors"><div class="contributors-head"><div><p class="eyebrow">THE PEOPLE BEHIND THE GRID</p><h3>BINGO 25 — CREATED BY ANLOSSA GROUP</h3></div><span class="studio-badge">AG / STUDIO</span></div><article class="founder-card"><span class="founder-number">01</span><div><h4>Pradeep Meena <small>— Main Developer &amp; Founder</small></h4><p class="founder-role">Chairman, Anlossa Group</p><p>Lead Systems Architect and Core Developer of Bingo 25. Engineered the real-time 12-line evaluation engine, zero-latency SVG strike-through renderer, heuristic bot AI, and Firebase anti-cheat security infrastructure.</p></div></article><article class="founder-card"><span class="founder-number">02</span><div><h4>Yagini Meena <small>— Co-Founder</small></h4><p class="founder-role">Second Game Founder, Anlossa Group</p><p>Co-founder of Bingo 25 and Lead Game Systems Designer. Architected the 6-tier competitive rank ladder from Initiate to Void, anti-farm matchmaking pacing, and player progression milestones.</p></div></article><article class="founder-card"><span class="founder-number">03</span><div><h4>Anika Meena <small>— Co-Founder</small></h4><p class="founder-role">Third Game Founder, Anlossa Group</p><p>Co-founder of Bingo 25 and Head of Creative Direction. Designed the minimalist esports UI language, board skin themes, rank crest aesthetics, and Discord community reward events.</p></div></article><footer>© 2026 Anlossa Group. All Rights Reserved.</footer></div></section>
+
+    <section class="modal hidden" id="invite-modal" role="dialog" aria-modal="true" aria-labelledby="invite-title"><p class="eyebrow">CHALLENGE INCOMING</p><div class="invite-crest" id="invite-crest">I</div><h2 id="invite-title">You've been challenged</h2><p class="muted" id="invite-from">A player wants to face you.</p><p class="invite-countdown">Expires in <b id="invite-countdown">30</b>s</p><div class="modal-actions"><button class="button button-outline" id="decline-invite">Decline</button><button class="button button-primary" id="accept-invite">Accept challenge</button></div></section>
+
+    <section class="modal modal-wide hidden" id="result-modal" role="dialog" aria-modal="true" aria-labelledby="result-title"><button class="modal-close" data-close="result-modal" aria-label="Close">×</button><p class="eyebrow">MATCH COMPLETE</p><h2 id="result-title">Victory.</h2><p class="muted" id="result-summary">A well-played match.</p><div class="reveal-boards"><div><small>YOUR BOARD</small><div class="reveal-grid" id="reveal-mine"></div></div><div><small>OPPONENT BOARD</small><div class="reveal-grid" id="reveal-opponent"></div></div></div><div class="modal-actions"><button class="button button-outline" id="rematch-button">Instant rematch</button><button class="button button-primary" id="result-lobby">Return to lobby</button></div></section>
+
+    <section class="modal modal-wide hidden" id="staff-modal" role="dialog" aria-modal="true" aria-labelledby="staff-title"><button class="modal-close" data-close="staff-modal" aria-label="Close">×</button><p class="eyebrow">RESTRICTED ACCESS</p><h2 id="staff-title">Staff control</h2><div class="staff-tabs"><button class="active" data-staff-tab="overview">Overview</button><button data-staff-tab="players">Players</button><button data-staff-tab="codes">Codes &amp; banner</button><button data-staff-tab="audit">Audit log</button></div><div id="staff-content"><p class="muted">Staff tools require a configured Firebase project and an authorized role.</p></div></section>
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+    <footer class="page-footer"><span>BINGO 25 <i>×</i> ANLOSSA GROUP</span><span>BUILT FOR THE NEXT MOVE.</span></footer>
+  </div>
+  <script type="module" src="app.js"></script>
+</body>
+</html>
