@@ -1,10 +1,12 @@
-// Bingo 25 — Anlossa Group. Configure these values in Firebase Console before enabling online play.
-export const firebaseConfig = {
-  apiKey: "YOUR_FIREBASE_API_KEY",
-  authDomain: "YOUR_PROJECT.firebaseapp.com",
-  databaseURL: "https://YOUR_PROJECT-default-rtdb.firebaseio.com",
-  projectId: "YOUR_PROJECT",
-  appId: "YOUR_FIREBASE_APP_ID"
+// Bingo 25 — Anlossa Group. Firebase client configuration for the live project.
+const firebaseConfig = {
+  apiKey: "AIzaSyD2HGJC20gvjZbSXYaawnAIIAcwmrqiL2I",
+  authDomain: "bingo25-25631.firebaseapp.com",
+  databaseURL: "https://bingo25-25631-default-rtdb.asia-southeast1.firebasedatabase.app",
+  projectId: "bingo25-25631",
+  storageBucket: "bingo25-25631.firebasestorage.app",
+  messagingSenderId: "373010279847",
+  appId: "1:373010279847:web:6a21b43d03ed702a5b1a82"
 };
 export const PRIMARY_OWNER_UID = "REPLACE_WITH_PRIMARY_OWNER_UID";
 
