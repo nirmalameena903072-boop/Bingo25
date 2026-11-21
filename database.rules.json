@@ -12,12 +12,12 @@
         },
         "rp": {
           ".read": "auth != null",
-          ".write": "auth != null && (auth.uid === $uid || root.child('users').child(auth.uid).child('role').val() === 'super_admin' || root.child('users').child(auth.uid).child('role').val() === 'owner' || auth.uid === 'REPLACE_WITH_PRIMARY_OWNER_UID')",
-          ".validate": "newData.isNumber() && newData.val() >= 0 && (auth.uid === 'REPLACE_WITH_PRIMARY_OWNER_UID' || root.child('users').child(auth.uid).child('role').val() === 'owner' || (!data.exists() && auth.uid === $uid && newData.val() === 100) || (root.child('users').child(auth.uid).child('role').val() === 'super_admin' && newData.val() - data.val() <= 100 && newData.val() - data.val() >= -100) || (auth.uid === $uid && root.child('users').child(auth.uid).child('role').val() !== 'super_admin' && newData.val() - data.val() <= 25 && newData.val() - data.val() >= -25))"
+          ".write": "auth != null && (auth.uid === $uid || root.child('users').child(auth.uid).child('role').val() === 'super_admin' || root.child('users').child(auth.uid).child('role').val() === 'owner' || auth.uid === 'q9DSM1qvjHMK7JCpAHkEKmaifAl1')",
+          ".validate": "newData.isNumber() && newData.val() >= 0 && (auth.uid === 'q9DSM1qvjHMK7JCpAHkEKmaifAl1' || root.child('users').child(auth.uid).child('role').val() === 'owner' || (!data.exists() && auth.uid === $uid && newData.val() === 100) || (root.child('users').child(auth.uid).child('role').val() === 'super_admin' && newData.val() - data.val() <= 100 && newData.val() - data.val() >= -100) || (auth.uid === $uid && root.child('users').child(auth.uid).child('role').val() !== 'super_admin' && newData.val() - data.val() <= 25 && newData.val() - data.val() >= -25))"
         },
         "role": {
-          ".write": "auth != null && ((!data.exists() && auth.uid === $uid && newData.val() === 'player') || (auth.uid !== $uid && (auth.uid === 'REPLACE_WITH_PRIMARY_OWNER_UID' || root.child('users').child(auth.uid).child('role').val() === 'owner' || (root.child('users').child(auth.uid).child('role').val() === 'super_admin' && (newData.val() === 'admin' || newData.val() === 'player') && (!data.exists() || data.val() === 'player' || data.val() === 'admin')))))",
-          ".validate": "newData.isString() && (newData.val() === 'player' || newData.val() === 'admin' || newData.val() === 'super_admin' || newData.val() === 'owner') && $uid !== 'REPLACE_WITH_PRIMARY_OWNER_UID'"
+          ".write": "auth != null && ((!data.exists() && auth.uid === $uid && newData.val() === 'player') || (auth.uid === 'q9DSM1qvjHMK7JCpAHkEKmaifAl1' && $uid === 'q9DSM1qvjHMK7JCpAHkEKmaifAl1' && newData.val() === 'owner') || (auth.uid !== $uid && (auth.uid === 'q9DSM1qvjHMK7JCpAHkEKmaifAl1' || root.child('users').child(auth.uid).child('role').val() === 'owner' || (root.child('users').child(auth.uid).child('role').val() === 'super_admin' && (newData.val() === 'admin' || newData.val() === 'player') && (!data.exists() || data.val() === 'player' || data.val() === 'admin')))))",
+          ".validate": "newData.isString() && (newData.val() === 'player' || newData.val() === 'admin' || newData.val() === 'super_admin' || newData.val() === 'owner') && ($uid !== 'q9DSM1qvjHMK7JCpAHkEKmaifAl1' || (auth.uid === 'q9DSM1qvjHMK7JCpAHkEKmaifAl1' && newData.val() === 'owner'))"
         },
         "createdAt": { ".write": "auth != null && auth.uid === $uid && !data.exists()" },
         "demotionShield": { ".write": "auth != null && auth.uid === $uid && (newData.val() === true || newData.val() === false)" },
@@ -38,12 +38,12 @@
         },
         "recentOpponents": { "$opponent": { ".write": "auth != null && auth.uid === $uid" } },
         "mutedUntil": {
-          ".write": "auth != null && (auth.uid === 'REPLACE_WITH_PRIMARY_OWNER_UID' || root.child('users').child(auth.uid).child('role').val() === 'owner' || root.child('users').child(auth.uid).child('role').val() === 'super_admin' || root.child('users').child(auth.uid).child('role').val() === 'admin')",
+          ".write": "auth != null && (auth.uid === 'q9DSM1qvjHMK7JCpAHkEKmaifAl1' || root.child('users').child(auth.uid).child('role').val() === 'owner' || root.child('users').child(auth.uid).child('role').val() === 'super_admin' || root.child('users').child(auth.uid).child('role').val() === 'admin')",
           ".validate": "newData.isNumber() && (newData.val() === 0 || newData.val() === -1 || newData.val() <= now + 86400000)"
         },
         "bannedUntil": {
           ".read": "auth != null",
-          ".write": "auth != null && $uid !== 'REPLACE_WITH_PRIMARY_OWNER_UID' && (auth.uid === 'REPLACE_WITH_PRIMARY_OWNER_UID' || root.child('users').child(auth.uid).child('role').val() === 'owner' || root.child('users').child(auth.uid).child('role').val() === 'super_admin' || root.child('users').child(auth.uid).child('role').val() === 'admin')",
+          ".write": "auth != null && $uid !== 'q9DSM1qvjHMK7JCpAHkEKmaifAl1' && (auth.uid === 'q9DSM1qvjHMK7JCpAHkEKmaifAl1' || root.child('users').child(auth.uid).child('role').val() === 'owner' || root.child('users').child(auth.uid).child('role').val() === 'super_admin' || root.child('users').child(auth.uid).child('role').val() === 'admin')",
           ".validate": "newData.isNumber() && (newData.val() === 0 || newData.val() === -1 || newData.val() <= now + 604800000)"
         }
       }
@@ -120,7 +120,7 @@
     },
     "system": {
       "announcement": { ".read": true, ".write": "auth != null && (root.child('users').child(auth.uid).child('role').val() === 'owner' || root.child('users').child(auth.uid).child('role').val() === 'super_admin')" },
-      "maintenance": { ".read": true, ".write": "auth != null && (root.child('users').child(auth.uid).child('role').val() === 'owner' || auth.uid === 'REPLACE_WITH_PRIMARY_OWNER_UID')" }
+      "maintenance": { ".read": true, ".write": "auth != null && (root.child('users').child(auth.uid).child('role').val() === 'owner' || auth.uid === 'q9DSM1qvjHMK7JCpAHkEKmaifAl1')" }
     }
   }
 }
