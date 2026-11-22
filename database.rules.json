@@ -120,7 +120,7 @@
         },
         "squadId": {
           ".read": "auth != null",
-          ".write": "auth != null && auth.uid === $uid"
+          ".write": "auth != null && (auth.uid === $uid || (data.exists() && root.child('parties').child(data.val()).child('leaderUid').val() === auth.uid && !newData.exists()))"
         },
         "squadInvites": {
           ".read": "auth != null && auth.uid === $uid",
@@ -135,6 +135,11 @@
             ".write": "auth != null && (root.child('users').child(auth.uid).child('role').val() === 'owner' || root.child('users').child(auth.uid).child('role').val() === 'super_admin' || (auth.uid === $uid && !newData.exists()))",
             ".validate": "!newData.exists() || newData.hasChildren(['subject','body','theme','senderName'])"
           }
+        },
+        "equippedAura": {
+          ".read": "auth != null",
+          ".write": "auth != null && auth.uid === $uid && ((newData.val() === 'spark-pulse' && root.child('users').child($uid).child('stats').child('matchesPlayed').val() >= 1) || (newData.val() === 'tactician-surge' && (root.child('users').child($uid).child('rp').val() >= 300 || root.child('users').child($uid).child('stats').child('winStreak').val() >= 3)) || (newData.val() === 'line-breaker-flare' && (root.child('users').child($uid).child('rp').val() >= 600 || root.child('users').child($uid).child('stats').child('maxLinesInTurn').val() >= 3)) || (newData.val() === 'crimson-wrath' && (root.child('users').child($uid).child('rp').val() >= 1000 || root.child('users').child($uid).child('stats').child('winStreak').val() >= 5)) || (newData.val() === 'guardian-halo' && (root.child('users').child($uid).child('rp').val() >= 1500 || root.child('users').child($uid).child('stats').child('rankedWins').val() >= 25 || root.child('users').child($uid).child('stats').child('wins').val() >= 25)) || (newData.val() === 'void-abyss' && root.child('users').child($uid).child('rp').val() >= 2200) || (newData.val() === 'system-architect' && (root.child('users').child($uid).child('role').val() === 'owner' || root.child('users').child($uid).child('role').val() === 'super_admin' || root.child('users').child($uid).child('unlockedSkins').child('overdrive').val() === true)))",
+          ".validate": "newData.isString() && (newData.val() === 'spark-pulse' || newData.val() === 'tactician-surge' || newData.val() === 'line-breaker-flare' || newData.val() === 'crimson-wrath' || newData.val() === 'guardian-halo' || newData.val() === 'void-abyss' || newData.val() === 'system-architect')"
         }
       }
     },
@@ -230,7 +235,7 @@
     "squads": {
       "$squadId": {
         ".read": "auth != null",
-        ".write": "auth != null && !data.exists() && newData.child('leaderUid').val() === auth.uid",
+        ".write": "auth != null && ((!data.exists() && newData.child('leaderUid').val() === auth.uid) || (data.child('leaderUid').val() === auth.uid && !newData.exists()))",
         ".validate": "newData.hasChildren(['leaderUid','mode','members']) && newData.child('members').numChildren() <= 4",
         "leaderUid": {
           ".write": "auth != null && data.val() === auth.uid && newData.isString() && root.child('squads').child($squadId).child('members').child(newData.val()).exists()"
@@ -243,6 +248,71 @@
           "$memberUid": {
             ".write": "auth != null && (auth.uid === root.child('squads').child($squadId).child('leaderUid').val() || (auth.uid === $memberUid && ( !newData.exists() || root.child('squads').child($squadId).child('members').numChildren() < 4)))",
             ".validate": "!newData.exists() || newData.hasChildren(['username','status'])"
+          }
+        },
+        "name": {
+          ".write": "auth != null && root.child('squads').child($squadId).child('leaderUid').val() === auth.uid",
+          ".validate": "newData.isString() && newData.val().length > 0 && newData.val().length <= 24"
+        },
+        "emblemCrest": {
+          ".write": "auth != null && root.child('squads').child($squadId).child('leaderUid').val() === auth.uid",
+          ".validate": "newData.val() === 'lion' || newData.val() === 'raven' || newData.val() === 'griffin' || newData.val() === 'eclipse'"
+        },
+        "emblem": {
+          ".write": "auth != null && root.child('squads').child($squadId).child('leaderUid').val() === auth.uid",
+          ".validate": "newData.isString() && newData.val().length <= 34000 && newData.val().matches(/^data:image\\/jpeg;base64,[A-Za-z0-9+/=]+$/)"
+        }
+      }
+    },
+    "bingoOfficialGuild": {
+      ".read": "auth != null",
+      "announcement": {
+        ".read": "auth != null",
+        ".write": "auth != null && (auth.uid === 'q9DSM1qvjHMK7JCpAHkEKmaifAl1' || root.child('users').child(auth.uid).child('role').val() === 'owner')",
+        ".validate": "newData.isString() && newData.val().length <= 280"
+      },
+      "bounties": {
+        ".read": "auth != null",
+        "$bountyId": {
+          ".write": "auth != null && (auth.uid === 'q9DSM1qvjHMK7JCpAHkEKmaifAl1' || root.child('users').child(auth.uid).child('role').val() === 'owner')",
+          ".validate": "!newData.exists() || (newData.hasChildren(['text','createdAt','createdBy']) && newData.child('text').isString() && newData.child('text').val().length > 0 && newData.child('text').val().length <= 100 && newData.child('createdAt').isNumber() && newData.child('createdBy').isString() && newData.child('createdBy').val().length <= 20)"
+        }
+      },
+      "featuredAllies": {
+        ".read": "auth != null",
+        ".write": "auth != null && (auth.uid === 'q9DSM1qvjHMK7JCpAHkEKmaifAl1' || root.child('users').child(auth.uid).child('role').val() === 'owner')"
+      }
+    },
+    "parties": {
+      ".read": "auth != null",
+      "$partyId": {
+        ".read": "auth != null",
+        ".write": "auth != null && ((!data.exists() && newData.child('leaderUid').val() === auth.uid) || (data.child('leaderUid').val() === auth.uid && !newData.exists()))",
+        ".validate": "!newData.exists() || (newData.hasChildren(['leaderUid','mode','members']) && newData.child('leaderUid').isString() && newData.child('members').numChildren() <= 4 && (newData.child('mode').val() === 'ranked_1v1' || newData.child('mode').val() === 'unranked_1v1' || newData.child('mode').val() === 'ranked_squad' || newData.child('mode').val() === 'unranked_squad'))",
+        "leaderUid": {
+          ".write": "auth != null && data.val() === auth.uid && newData.isString() && root.child('parties').child($partyId).child('members').child(newData.val()).exists()",
+          ".validate": "newData.isString()"
+        },
+        "mode": {
+          ".write": "auth != null && root.child('parties').child($partyId).child('leaderUid').val() === auth.uid",
+          ".validate": "newData.val() === 'ranked_1v1' || newData.val() === 'unranked_1v1' || newData.val() === 'ranked_squad' || newData.val() === 'unranked_squad'"
+        },
+        "name": {
+          ".write": "auth != null && root.child('parties').child($partyId).child('leaderUid').val() === auth.uid",
+          ".validate": "newData.isString() && newData.val().length > 0 && newData.val().length <= 24"
+        },
+        "emblemCrest": {
+          ".write": "auth != null && root.child('parties').child($partyId).child('leaderUid').val() === auth.uid",
+          ".validate": "newData.val() === 'lion' || newData.val() === 'raven' || newData.val() === 'griffin' || newData.val() === 'eclipse'"
+        },
+        "emblem": {
+          ".write": "auth != null && root.child('parties').child($partyId).child('leaderUid').val() === auth.uid",
+          ".validate": "newData.isString() && newData.val().length <= 34000 && newData.val().matches(/^data:image\\/jpeg;base64,[A-Za-z0-9+/=]+$/)"
+        },
+        "members": {
+          "$memberUid": {
+            ".write": "auth != null && (auth.uid === root.child('parties').child($partyId).child('leaderUid').val() || (auth.uid === $memberUid && (!newData.exists() || root.child('parties').child($partyId).child('members').numChildren() < 4)))",
+            ".validate": "!newData.exists() || (newData.hasChildren(['username','status']) && newData.child('username').isString() && newData.child('username').val().length <= 15 && (newData.child('status').val() === 'online' || newData.child('status').val() === 'offline' || newData.child('status').val() === 'in_game'))"
           }
         }
       }
