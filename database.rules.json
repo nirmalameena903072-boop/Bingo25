@@ -116,7 +116,7 @@
         },
         "equippedFrame": {
           ".read": "auth != null",
-          ".write": "auth != null && auth.uid === $uid && (newData.val() === 'frame-initiate' || (newData.val() === 'frame-striker' && root.child('users').child($uid).child('rp').val() >= 300) || (newData.val() === 'frame-tactician' && root.child('users').child($uid).child('rp').val() >= 600) || (newData.val() === 'frame-vanguard' && root.child('users').child($uid).child('rp').val() >= 1000) || (newData.val() === 'frame-guardian' && root.child('users').child($uid).child('rp').val() >= 1500) || (newData.val() === 'frame-void' && root.child('users').child($uid).child('rp').val() >= 2200) || (newData.val() === 'frame-mythic' && (root.child('users').child($uid).child('role').val() === 'owner' || root.child('users').child($uid).child('role').val() === 'super_admin' || root.child('users').child($uid).child('unlockedSkins').child('overdrive').val() === true)) )"
+          ".write": "auth != null && auth.uid === $uid && (newData.val() === 'frame-initiate' || (newData.val() === 'frame-striker' && root.child('users').child($uid).child('rp').val() >= 300) || (newData.val() === 'frame-tactician' && root.child('users').child($uid).child('rp').val() >= 600) || (newData.val() === 'frame-vanguard' && root.child('users').child($uid).child('rp').val() >= 1000) || (newData.val() === 'frame-guardian' && root.child('users').child($uid).child('rp').val() >= 1500) || (newData.val() === 'frame-void' && root.child('users').child($uid).child('rp').val() >= 2200) || (newData.val() === 'frame-mythic' && (root.child('users').child($uid).child('role').val() === 'owner' || root.child('users').child($uid).child('role').val() === 'super_admin' || root.child('users').child($uid).child('unlockedSkins').child('overdrive').val() === true || root.child('users').child($uid).child('rp').val() >= 5000)) )"
         },
         "squadId": {
           ".read": "auth != null",
@@ -246,7 +246,7 @@
         },
         "members": {
           "$memberUid": {
-            ".write": "auth != null && (auth.uid === root.child('squads').child($squadId).child('leaderUid').val() || (auth.uid === $memberUid && ( !newData.exists() || root.child('squads').child($squadId).child('members').numChildren() < 4)))",
+            ".write": "auth != null && (auth.uid === root.child('squads').child($squadId).child('leaderUid').val() || (auth.uid === $memberUid && ( !newData.exists() || data.exists() || root.child('squads').child($squadId).child('members').numChildren() < 4)))",
             ".validate": "!newData.exists() || newData.hasChildren(['username','status'])"
           }
         },
@@ -311,7 +311,7 @@
         },
         "members": {
           "$memberUid": {
-            ".write": "auth != null && (auth.uid === root.child('parties').child($partyId).child('leaderUid').val() || (auth.uid === $memberUid && (!newData.exists() || root.child('parties').child($partyId).child('members').numChildren() < 4)))",
+            ".write": "auth != null && (auth.uid === root.child('parties').child($partyId).child('leaderUid').val() || (auth.uid === $memberUid && (!newData.exists() || data.exists() || root.child('parties').child($partyId).child('members').numChildren() < 4)))",
             ".validate": "!newData.exists() || (newData.hasChildren(['username','status']) && newData.child('username').isString() && newData.child('username').val().length <= 15 && (newData.child('status').val() === 'online' || newData.child('status').val() === 'offline' || newData.child('status').val() === 'in_game'))"
           }
         }
