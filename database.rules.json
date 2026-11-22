@@ -35,21 +35,21 @@
           ".write": "auth != null && auth.uid === $uid"
         },
         "equippedSkin": {
-          ".write": "auth != null && auth.uid === $uid && (root.child('users').child($uid).child('unlockedSkins').child(newData.val()).val() === true || newData.val() === 'notebook' || (newData.val() === 'classic' && root.child('users').child($uid).child('rp').val() >= 300) || (newData.val() === 'midnight' && root.child('users').child($uid).child('rp').val() >= 600) || (newData.val() === 'crimson' && root.child('users').child($uid).child('rp').val() >= 1000) || (newData.val() === 'guardian' && root.child('users').child($uid).child('rp').val() >= 1500) || (newData.val() === 'void' && root.child('users').child($uid).child('rp').val() >= 2200))",
+          ".write": "auth != null && auth.uid === $uid && (root.child('users').child($uid).child('unlockedSkins').child(newData.val()).val() === true || (newData.val() === 'overdrive' && root.child('users').child($uid).child('rp').val() >= 5000) || newData.val() === 'notebook' || (newData.val() === 'classic' && root.child('users').child($uid).child('rp').val() >= 300) || (newData.val() === 'midnight' && root.child('users').child($uid).child('rp').val() >= 600) || (newData.val() === 'crimson' && root.child('users').child($uid).child('rp').val() >= 1000) || (newData.val() === 'guardian' && root.child('users').child($uid).child('rp').val() >= 1500) || (newData.val() === 'void' && root.child('users').child($uid).child('rp').val() >= 2200))",
           ".read": "auth != null"
         },
         "equippedTitle": {
-          ".write": "auth != null && auth.uid === $uid && (root.child('users').child($uid).child('unlockedTitles').child(newData.val()).val() === true || newData.val() === 'Rookie' || (newData.val() === 'Grid Walker' && root.child('users').child($uid).child('rp').val() >= 300) || (newData.val() === 'Line Breaker' && root.child('users').child($uid).child('rp').val() >= 600) || (newData.val() === 'Vanguard Elite' && root.child('users').child($uid).child('rp').val() >= 1000) || (newData.val() === 'The Guardian' && root.child('users').child($uid).child('rp').val() >= 1500) || (newData.val() === 'Lord of the Void' && root.child('users').child($uid).child('rp').val() >= 2200))",
+          ".write": "auth != null && auth.uid === $uid && (root.child('users').child($uid).child('unlockedTitles').child(newData.val()).val() === true || newData.val() === 'Rookie' || (newData.val() === 'Grid Walker' && root.child('users').child($uid).child('rp').val() >= 300) || (newData.val() === 'Line Breaker' && root.child('users').child($uid).child('rp').val() >= 600) || (newData.val() === 'Vanguard Elite' && root.child('users').child($uid).child('rp').val() >= 1000) || (newData.val() === 'The Guardian' && root.child('users').child($uid).child('rp').val() >= 1500) || (newData.val() === '[SYSTEM ARCHITECT]' && root.child('users').child($uid).child('rp').val() >= 5000) || (newData.val() === 'Lord of the Void' && root.child('users').child($uid).child('rp').val() >= 2200))",
           ".read": "auth != null"
         },
         "unlockedSkins": {
           "$skin": {
-            ".write": "auth != null && ((auth.uid === $uid && newData.val() === true && ($skin === 'notebook' || ($skin === 'classic' && root.child('users').child($uid).child('rp').val() >= 300) || ($skin === 'midnight' && root.child('users').child($uid).child('rp').val() >= 600) || ($skin === 'crimson' && root.child('users').child($uid).child('rp').val() >= 1000) || ($skin === 'guardian' && root.child('users').child($uid).child('rp').val() >= 1500) || ($skin === 'void' && root.child('users').child($uid).child('rp').val() >= 2200))) || root.child('users').child(auth.uid).child('role').val() === 'owner' || root.child('users').child(auth.uid).child('role').val() === 'super_admin')"
+            ".write": "auth != null && ((auth.uid === $uid && newData.val() === true && ($skin === 'notebook' || ($skin === 'overdrive' && root.child('users').child($uid).child('rp').val() >= 5000) || ($skin === 'classic' && root.child('users').child($uid).child('rp').val() >= 300) || ($skin === 'midnight' && root.child('users').child($uid).child('rp').val() >= 600) || ($skin === 'crimson' && root.child('users').child($uid).child('rp').val() >= 1000) || ($skin === 'guardian' && root.child('users').child($uid).child('rp').val() >= 1500) || ($skin === 'void' && root.child('users').child($uid).child('rp').val() >= 2200))) || root.child('users').child(auth.uid).child('role').val() === 'owner' || root.child('users').child(auth.uid).child('role').val() === 'super_admin')"
           }
         },
         "unlockedTitles": {
           "$title": {
-            ".write": "auth != null && ((auth.uid === $uid && newData.val() === true && ($title === 'Rookie' || ($title === 'Grid Walker' && root.child('users').child($uid).child('rp').val() >= 300) || ($title === 'Line Breaker' && root.child('users').child($uid).child('rp').val() >= 600) || ($title === 'Vanguard Elite' && root.child('users').child($uid).child('rp').val() >= 1000) || ($title === 'The Guardian' && root.child('users').child($uid).child('rp').val() >= 1500) || ($title === 'Lord of the Void' && root.child('users').child($uid).child('rp').val() >= 2200))) || root.child('users').child(auth.uid).child('role').val() === 'owner' || root.child('users').child(auth.uid).child('role').val() === 'super_admin')"
+            ".write": "auth != null && ((auth.uid === $uid && newData.val() === true && ($title === 'Rookie' || ($title === '[SYSTEM ARCHITECT]' && root.child('users').child($uid).child('rp').val() >= 5000) || ($title === 'Grid Walker' && root.child('users').child($uid).child('rp').val() >= 300) || ($title === 'Line Breaker' && root.child('users').child($uid).child('rp').val() >= 600) || ($title === 'Vanguard Elite' && root.child('users').child($uid).child('rp').val() >= 1000) || ($title === 'The Guardian' && root.child('users').child($uid).child('rp').val() >= 1500) || ($title === 'Lord of the Void' && root.child('users').child($uid).child('rp').val() >= 2200))) || root.child('users').child(auth.uid).child('role').val() === 'owner' || root.child('users').child(auth.uid).child('role').val() === 'super_admin')"
           }
         },
         "friends": {
@@ -102,6 +102,38 @@
             "deleted": {
               ".write": "auth != null && auth.uid === $uid && newData.isBoolean()"
             }
+          }
+        },
+        "homeTag": {
+          ".read": "auth != null",
+          ".write": "auth != null && auth.uid === $uid",
+          ".validate": "newData.isString() && newData.val().length <= 32"
+        },
+        "lastSeen": {
+          ".read": "auth != null",
+          ".write": "auth != null && auth.uid === $uid",
+          ".validate": "newData.isNumber()"
+        },
+        "equippedFrame": {
+          ".read": "auth != null",
+          ".write": "auth != null && auth.uid === $uid && (newData.val() === 'frame-initiate' || (newData.val() === 'frame-striker' && root.child('users').child($uid).child('rp').val() >= 300) || (newData.val() === 'frame-tactician' && root.child('users').child($uid).child('rp').val() >= 600) || (newData.val() === 'frame-vanguard' && root.child('users').child($uid).child('rp').val() >= 1000) || (newData.val() === 'frame-guardian' && root.child('users').child($uid).child('rp').val() >= 1500) || (newData.val() === 'frame-void' && root.child('users').child($uid).child('rp').val() >= 2200) || (newData.val() === 'frame-mythic' && (root.child('users').child($uid).child('role').val() === 'owner' || root.child('users').child($uid).child('role').val() === 'super_admin')) )"
+        },
+        "squadId": {
+          ".read": "auth != null",
+          ".write": "auth != null && auth.uid === $uid"
+        },
+        "squadInvites": {
+          ".read": "auth != null && auth.uid === $uid",
+          "$inviteId": {
+            ".write": "auth != null && (auth.uid === $uid || (newData.child('from').val() === auth.uid && root.child('users').child(auth.uid).child('friends').child($uid).val() === true))",
+            ".validate": "!newData.exists() || newData.hasChildren(['from','fromName','squadId','status'])"
+          }
+        },
+        "liveAlerts": {
+          ".read": "auth != null && auth.uid === $uid",
+          "$alertId": {
+            ".write": "auth != null && (root.child('users').child(auth.uid).child('role').val() === 'owner' || root.child('users').child(auth.uid).child('role').val() === 'super_admin' || (auth.uid === $uid && !newData.exists()))",
+            ".validate": "!newData.exists() || newData.hasChildren(['subject','body','theme','senderName'])"
           }
         }
       }
@@ -193,6 +225,26 @@
       "maintenance": {
         ".read": true,
         ".write": "auth != null && (root.child('users').child(auth.uid).child('role').val() === 'owner' || auth.uid === 'q9DSM1qvjHMK7JCpAHkEKmaifAl1')"
+      }
+    },
+    "squads": {
+      "$squadId": {
+        ".read": "auth != null",
+        ".write": "auth != null && !data.exists() && newData.child('leaderUid').val() === auth.uid",
+        ".validate": "newData.hasChildren(['leaderUid','mode','members']) && newData.child('members').numChildren() <= 4",
+        "leaderUid": {
+          ".write": "auth != null && data.val() === auth.uid && newData.isString() && root.child('squads').child($squadId).child('members').child(newData.val()).exists()"
+        },
+        "mode": {
+          ".write": "auth != null && root.child('squads').child($squadId).child('leaderUid').val() === auth.uid",
+          ".validate": "newData.val() === 'ranked_1v1' || newData.val() === 'unranked_1v1' || newData.val() === 'ranked_squad' || newData.val() === 'unranked_squad'"
+        },
+        "members": {
+          "$memberUid": {
+            ".write": "auth != null && (auth.uid === root.child('squads').child($squadId).child('leaderUid').val() || (auth.uid === $memberUid && ( !newData.exists() || root.child('squads').child($squadId).child('members').numChildren() < 4)))",
+            ".validate": "!newData.exists() || newData.hasChildren(['username','status'])"
+          }
+        }
       }
     }
   }
